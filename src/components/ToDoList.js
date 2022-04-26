@@ -9,10 +9,11 @@ class ToDoList extends React.PureComponent {
       <ul>
         {todos.map((todo) => (
           <TodoItem
+            id={todo.id}
             key={todo.id}
             checked={todo.completed}
             title={todo.title}
-            onChange={handleChange}
+            handleChangeProps={handleChange}
           />
         ))}
       </ul>
@@ -21,7 +22,7 @@ class ToDoList extends React.PureComponent {
 }
 
 ToDoList.propTypes = {
-  todos: PropTypes.shape([]).isRequired,
+  todos: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   handleChange: PropTypes.func.isRequired,
 };
 

@@ -27,9 +27,21 @@ class TodoContainer extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange() {
-    const { todos } = this.state;
-    console.log(todos);
+  handleChange(id) {
+    this.setState((prevState) => {
+      const updatedTodos = prevState.todos.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            completed: !todo.completed,
+          };
+        }
+        return todo;
+      });
+      return {
+        todos: updatedTodos,
+      };
+    });
   }
 
   render() {
@@ -37,7 +49,7 @@ class TodoContainer extends React.Component {
     return (
       <>
         <Header />
-        <ToDoList todos={todos} onChange={this.handleChange} />
+        <ToDoList todos={todos} handleChange={this.handleChange} />
       </>
     );
   }

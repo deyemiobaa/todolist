@@ -2,24 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function ToDoItem(props) {
-  const { checked, title, handleChange } = props;
+  const {
+    checked, title, handleChangeProps, id,
+  } = props;
   return (
     <li>
       <input
         type="checkbox"
         checked={checked}
-        onChange={() => handleChange()}
+        onChange={() => handleChangeProps(id)}
       />
       {' '}
       {title}
+      {' '}
+      <button
+        type="button"
+      >
+        Delete
+      </button>
     </li>
   );
 }
 
 ToDoItem.propTypes = {
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   checked: PropTypes.bool.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  handleChangeProps: PropTypes.func.isRequired,
 };
 
 export default ToDoItem;
